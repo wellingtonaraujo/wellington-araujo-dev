@@ -1,7 +1,15 @@
 import services from '../data/services'
 import ServiceCard from '../components/ServiceCard'
 
-export default function Services() {
+export default function Services({ setActiveProject, projects }) {
+  function handleServiceClick(service) {
+    const project = projects.find(
+      (p) => service.projects?.includes(p.id)
+    )
+
+    if (project) setActiveProject(project)
+  }
+
   return (
     <section
       id="services"
@@ -29,6 +37,7 @@ export default function Services() {
             <ServiceCard
               key={service.id}
               service={service}
+              onClick={() => handleServiceClick(service)}
             />
           ))}
         </div>

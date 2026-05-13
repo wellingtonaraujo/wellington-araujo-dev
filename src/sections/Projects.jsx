@@ -1,13 +1,11 @@
 import projects from '../data/projects'
 import ProjectCard from '../components/ProjectCard'
 
-export default function Projects() {
+export default function Projects({ setActiveProject }) {
   return (
-    <section
-      id="projects"
-      className="py-32 border-t border-zinc-900"
-    >
+    <section id="projects" className="py-32 border-t border-zinc-900">
       <div className="max-w-7xl mx-auto px-6">
+
         <div className="mb-16">
           <p className="text-blue-400 uppercase tracking-[0.3em] text-sm mb-4">
             Projetos
@@ -24,13 +22,17 @@ export default function Projects() {
         </div>
 
         <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+
           {projects.map((project) => (
             <ProjectCard
               key={project.id}
               project={project}
+              onClick={(project) => setActiveProject(project)}
             />
           ))}
+
         </div>
+
       </div>
     </section>
   )

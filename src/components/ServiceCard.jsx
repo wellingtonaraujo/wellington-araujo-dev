@@ -1,8 +1,13 @@
 import { ArrowUpRight } from 'lucide-react'
 
-export default function ServiceCard({ service }) {
+export default function ServiceCard({ service, onClick }) {
   return (
-    <div className="group relative p-8 rounded-2xl border border-white/10 bg-zinc-900/30 hover:bg-zinc-900/60 transition-all duration-300">
+    <div
+      onClick={() => {
+        console.log("SERVICE CLICKED:", service)
+        onClick?.()
+      }}
+    >
 
       {/* topo decorativo */}
       <div className="flex items-center justify-between mb-6">
