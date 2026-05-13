@@ -1,24 +1,55 @@
+import { useLanguage } from '../context/LanguageContext'
+
 export default function Footer() {
+  const { language } = useLanguage()
+
+  const content = {
+    role: {
+      pt: "Full Stack Developer • Laravel • JavaScript",
+      en: "Full Stack Developer • Laravel • JavaScript"
+    },
+
+    links: {
+      github: {
+        pt: "GitHub",
+        en: "GitHub"
+      },
+      linkedin: {
+        pt: "LinkedIn",
+        en: "LinkedIn"
+      },
+      contact: {
+        pt: "Contato",
+        en: "Contact"
+      }
+    }
+  }
+
   return (
     <footer className="border-t border-zinc-900 py-10">
+
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+
+        {/* LEFT */}
         <div>
           <h3 className="font-black text-lg mb-2">
             Wellington Araújo
           </h3>
 
           <p className="text-zinc-500 text-sm">
-            Full Stack Developer • Laravel • JavaScript
+            {content.role[language]}
           </p>
         </div>
 
+        {/* RIGHT */}
         <div className="flex items-center gap-6 text-sm text-zinc-400">
+
           <a
             href="https://github.com/seugithub"
             target="_blank"
             className="hover:text-white transition"
           >
-            GitHub
+            {content.links.github[language]}
           </a>
 
           <a
@@ -26,17 +57,20 @@ export default function Footer() {
             target="_blank"
             className="hover:text-white transition"
           >
-            LinkedIn
+            {content.links.linkedin[language]}
           </a>
 
           <a
             href="mailto:seuemail@email.com"
             className="hover:text-white transition"
           >
-            Contato
+            {content.links.contact[language]}
           </a>
+
         </div>
+
       </div>
+
     </footer>
   )
 }

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-
+  const { language, toggleLanguage } = useLanguage()
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -47,6 +48,12 @@ export default function Navbar() {
             <a href="#projects" className="hover:text-white transition">Projetos</a>
             <a href="#services" className="hover:text-white transition">Serviços</a>
             <a href="#contact" className="hover:text-white transition">Contato</a>
+            <button
+              onClick={toggleLanguage}
+              className="ml-4 px-3 py-1 rounded-lg border border-white/10 hover:border-white/30 text-xs text-zinc-300 hover:text-white transition"
+            >
+              {language === 'pt' ? 'EN' : 'PT'}
+            </button>
           </nav>
 
           {/* MOBILE BUTTON */}
@@ -62,9 +69,8 @@ export default function Navbar() {
 
       {/* OVERLAY + MENU MOBILE */}
       <div
-        className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
       >
         {/* BACKDROP */}
         <div
@@ -74,9 +80,8 @@ export default function Navbar() {
 
         {/* MENU LATERAL */}
         <div
-          className={`absolute right-0 top-0 h-full w-72 bg-zinc-950 border-l border-white/10 shadow-2xl transform transition-transform duration-300 ${
-            isOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
+          className={`absolute right-0 top-0 h-full w-72 bg-zinc-950 border-l border-white/10 shadow-2xl transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'
+            }`}
         >
           <nav className="flex flex-col px-6 py-10">
 
@@ -111,6 +116,13 @@ export default function Navbar() {
             >
               Contato
             </a>
+
+            <button
+              onClick={toggleLanguage}
+              className="mt-6 py-3 px-4 rounded-xl border border-white/10 text-zinc-300 hover:text-white transition"
+            >
+              {language === 'pt' ? 'Trocar para English' : 'Switch to Português'}
+            </button>
 
           </nav>
         </div>

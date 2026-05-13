@@ -1,27 +1,31 @@
+import { useLanguage } from '../context/LanguageContext'
+
 export default function ProjectModal({ project, onClose }) {
-  if (!project) return null;
+  const { language } = useLanguage()
+
+  if (!project) return null
 
   return (
     <div
       className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-start justify-center overflow-y-auto"
       onClick={onClose}
     >
-      {/* CONTAINER */}
       <div
         className="relative w-full max-w-5xl my-16 mx-4"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* CARD */}
         <div className="bg-zinc-950 border border-white/10 rounded-3xl shadow-2xl overflow-hidden">
 
           {/* HEADER */}
           <div className="sticky top-0 z-10 bg-zinc-950/90 backdrop-blur-xl border-b border-white/10 px-6 py-4 flex items-center justify-between">
+
             <div>
               <p className="text-blue-400 text-xs uppercase tracking-widest">
-                {project.category}
+                {project.category?.[language] || project.category}
               </p>
+
               <h2 className="text-lg font-bold">
-                {project.title}
+                {project.title?.[language] || project.title}
               </h2>
             </div>
 
@@ -33,16 +37,15 @@ export default function ProjectModal({ project, onClose }) {
             </button>
           </div>
 
-          {/* IMAGE HERO */}
+          {/* IMAGE */}
           <div className="border-b border-white/10">
             <img
               src={project.image}
-              alt={project.title}
+              alt={project.title?.[language]}
               className="w-full h-[320px] object-cover"
             />
           </div>
 
-          {/* CONTENT */}
           <div className="p-8 md:p-12 space-y-12">
 
             {/* OVERVIEW */}
@@ -51,7 +54,7 @@ export default function ProjectModal({ project, onClose }) {
                 Overview
               </h3>
               <p className="text-zinc-300 leading-relaxed">
-                {project.description}
+                {project.description?.[language]}
               </p>
             </section>
 
@@ -59,10 +62,10 @@ export default function ProjectModal({ project, onClose }) {
             {project.context && (
               <section>
                 <h3 className="text-sm uppercase tracking-widest text-blue-400 mb-3">
-                  Contexto
+                  {language === 'pt' ? 'Contexto' : 'Context'}
                 </h3>
                 <p className="text-zinc-400 leading-relaxed whitespace-pre-line">
-                  {project.context}
+                  {project.context?.[language]}
                 </p>
               </section>
             )}
@@ -71,10 +74,10 @@ export default function ProjectModal({ project, onClose }) {
             {project.challenges && (
               <section className="border-l-2 border-yellow-500/30 pl-4">
                 <h3 className="text-sm uppercase tracking-widest text-yellow-400 mb-3">
-                  Desafios
+                  {language === 'pt' ? 'Desafios' : 'Challenges'}
                 </h3>
                 <p className="text-zinc-300 leading-relaxed whitespace-pre-line">
-                  {project.challenges}
+                  {project.challenges?.[language]}
                 </p>
               </section>
             )}
@@ -83,10 +86,10 @@ export default function ProjectModal({ project, onClose }) {
             {project.solution && (
               <section className="border-l-2 border-blue-500/30 pl-4">
                 <h3 className="text-sm uppercase tracking-widest text-blue-400 mb-3">
-                  Solução
+                  {language === 'pt' ? 'Solução' : 'Solution'}
                 </h3>
                 <p className="text-zinc-300 leading-relaxed whitespace-pre-line">
-                  {project.solution}
+                  {project.solution?.[language]}
                 </p>
               </section>
             )}
@@ -95,10 +98,10 @@ export default function ProjectModal({ project, onClose }) {
             {project.result && (
               <section>
                 <h3 className="text-sm uppercase tracking-widest text-green-400 mb-3">
-                  Resultado
+                  {language === 'pt' ? 'Resultado' : 'Result'}
                 </h3>
                 <p className="text-zinc-300 leading-relaxed whitespace-pre-line">
-                  {project.result}
+                  {project.result?.[language]}
                 </p>
               </section>
             )}
@@ -107,10 +110,10 @@ export default function ProjectModal({ project, onClose }) {
             {project.impact && (
               <section className="bg-white/5 border border-white/10 rounded-2xl p-6">
                 <h3 className="text-sm uppercase tracking-widest text-purple-400 mb-3">
-                  Impacto
+                  {language === 'pt' ? 'Impacto' : 'Impact'}
                 </h3>
                 <p className="text-zinc-300 leading-relaxed whitespace-pre-line">
-                  {project.impact}
+                  {project.impact?.[language]}
                 </p>
               </section>
             )}
@@ -119,7 +122,7 @@ export default function ProjectModal({ project, onClose }) {
             {project.technologies?.length > 0 && (
               <section>
                 <h3 className="text-sm uppercase tracking-widest text-blue-400 mb-4">
-                  Tecnologias
+                  {language === 'pt' ? 'Tecnologias' : 'Technologies'}
                 </h3>
 
                 <div className="flex flex-wrap gap-2">
@@ -139,14 +142,14 @@ export default function ProjectModal({ project, onClose }) {
             {project.highlights?.length > 0 && (
               <section>
                 <h3 className="text-sm uppercase tracking-widest text-blue-400 mb-4">
-                  Destaques
+                  {language === 'pt' ? 'Destaques' : 'Highlights'}
                 </h3>
 
                 <ul className="space-y-2 text-zinc-300">
                   {project.highlights.map((item, i) => (
                     <li key={i} className="flex gap-2">
                       <span className="text-blue-400">•</span>
-                      {item}
+                      {item?.[language] || item}
                     </li>
                   ))}
                 </ul>
@@ -157,5 +160,5 @@ export default function ProjectModal({ project, onClose }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
